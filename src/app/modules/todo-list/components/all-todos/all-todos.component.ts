@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Todo } from './models/todo.model';
-import { AppState } from './store';
-import { TodoListModule } from './store/actions/todo-list.action';
-import { selectTodos$ } from './store/selectors/todo-list.selector';
 import { tap } from 'rxjs/operators';
+import { Todo } from 'src/app/models/todo.model';
+import { AppState } from 'src/app/store';
+import { selectTodos$ } from 'src/app/store/selectors/todo-list.selector';
+import { TodoListModule } from 'src/app/store/actions/todo-list.action';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-all-todos',
+  templateUrl: './all-todos.component.html',
+  styleUrls: ['./all-todos.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AllTodosComponent implements OnInit {
   todos$: Observable<Todo[]>;
 
   todoForm: FormGroup;
