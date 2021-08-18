@@ -1,0 +1,16 @@
+{
+  "todos": [
+    {
+      "userId": 1,
+      "id": 3,
+      "title": "fugiat veniam minus",
+      "completed": true
+    },
+    {
+      "userId": 1,
+      "id": 2,
+      "title": "Intégrer Redux dans le projet",
+      "completed": false
+    }
+  ]
+}

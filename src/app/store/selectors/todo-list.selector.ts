@@ -9,3 +9,8 @@ export const selectTodos$ = createSelector(
   selectTodoListState$,
   (state: TodoListState): Todo[] => state.data
 );
+
+export const selectTodoSelected$ = createSelector(
+  selectTodoListState$,
+  (state: TodoListState): Todo | undefined => state.selectTodo
+);

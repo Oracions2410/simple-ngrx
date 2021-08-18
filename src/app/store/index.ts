@@ -1,8 +1,8 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { InjectionToken } from '@angular/core';
 
-import { todosReducer } from './reducers/todo-list-reducer';
-import { TodoListState } from '../models/todo.model';
+import { todosReducer } from '@Reducers/todo-list-reducer';
+import { TodoListState } from '@Models/todo.model';
 
 const reducers = {
   todos: todosReducer,

@@ -6,6 +6,7 @@ import { TodoListComponent } from './todo-list.component';
 import { SelectTodoComponent } from './components/select-todo/select-todo.component';
 import { AllTodosComponent } from './components/all-todos/all-todos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [TodoListComponent, AllTodosComponent, SelectTodoComponent],
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TodoListRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
   ],
   bootstrap: [TodoListComponent],
 })

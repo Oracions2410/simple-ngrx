@@ -18,11 +18,13 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
-      "@Models/*": ["app/models/*"],
-      "@StoreConfig": ["app/store/index.js"],
-      "@Actions/*": ["app/store/actions/*"],
-      "@Selectors/*": ["app/store/selectors/*"],
-      "@Reducers/*": ["app/store/reducers/*"]
+      "@Models/*": ["./src/app/models/*"],
+      "@StoreConfig": ["./src/app/store/index.js"],
+      "@Actions/*": ["./src/app/store/actions/*"],
+      "@Selectors/*": ["./src/app/store/selectors/*"],
+      "@Reducers/*": ["./src/app/store/reducers/*"],
+      "@Services/*": ["./src/app/services/*"],
+      "@Env": ["./src/environments/environment.ts"]
     }
   },
   "angularCompilerOptions": {

@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Todo } from 'src/app/models/todo.model';
-import { AppState } from 'src/app/store';
-import { selectTodos$ } from 'src/app/store/selectors/todo-list.selector';
-import { TodoListModule } from 'src/app/store/actions/todo-list.action';
+import { Todo } from '@Models/todo.model';
+import { AppState } from '@StoreConfig';
+import { selectTodos$ } from '@Selectors/todo-list.selector';
+import { TodoListModule } from '@Actions/todo-list.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-todos',
@@ -22,7 +23,8 @@ export class AllTodosComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     // Initialization
     this.todolength = 0;
@@ -38,7 +40,7 @@ export class AllTodosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new TodoListModule.InitTodos());
+    // this.store.dispatch(new TodoListModule.InitTodos());
   }
 
   createTodo(todo: Todo) {
@@ -50,5 +52,10 @@ export class AllTodosComponent implements OnInit {
 
   deleteTodo(id: number): void {
     this.store.dispatch(new TodoListModule.DeleteTodo(id));
+  }
+
+  selectTodo(todo: Todo): void {
+    this.store.dispatch(new TodoListModule.SelectTodo(todo));
+    this.router.navigate(['/todo-list/select-todo']);
   }
 }

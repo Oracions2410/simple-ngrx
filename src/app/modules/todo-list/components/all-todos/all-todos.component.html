@@ -12,7 +12,8 @@
   <li *ngFor="let todo of todos$ | async">
     <label>{{ todo.title }}</label>
     <div>
-      <input type="checkbox" [value]="todo.completed" />
+      <input type="checkbox" [(ngModel)]="todo.completed" disabled="disabled" />
+      <button (click)="selectTodo(todo)">Modifier</button>
       <button (click)="deleteTodo(todo.id)">Supprimer</button>
     </div>
   </li>

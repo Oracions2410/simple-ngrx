@@ -1,11 +1,12 @@
-import { TodoListModule } from '../actions/todo-list.action';
-import { TodoListState, Todo } from '../../models/todo.model';
+import { TodoListModule } from '@Actions/todo-list.action';
+import { TodoListState, Todo } from '@Models/todo.model';
 import { todosMock } from '../../mocks/todo-list-data';
 
 const initialState: TodoListState = {
   data: [],
   loading: false,
   loaded: false,
+  selectTodo: undefined,
 };
 
 export function todosReducer(
@@ -16,7 +17,7 @@ export function todosReducer(
     case TodoListModule.ActionTypes.INIT_TODOS:
       return {
         ...state,
-        data: [...todosMock],
+        data: [...action.payload],
       };
 
     case TodoListModule.ActionTypes.CREATE_TODO:
@@ -29,6 +30,23 @@ export function todosReducer(
       return {
         ...state,
         data: state.data.filter((todo: Todo) => todo.id !== action.payload),
+      };
+
+    case TodoListModule.ActionTypes.SELECT_TODO:
+      return {
+        ...state,
+        selectTodo: action.payload,
+      };
+
+    case TodoListModule.ActionTypes.UPDATE_TODO:
+      return {
+        ...state,
+        data: state.data.map((todo: Todo) => {
+          if (action.payload.id === todo.id) {
+            return action.payload;
+          }
+          return todo;
+        }),
       };
 
     default:
