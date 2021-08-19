@@ -41,8 +41,8 @@ export class AllTodosComponent implements OnInit {
     this.todosLoaded = store.pipe(select(selectTodosLoaded$));
 
     this.todos$ = store.pipe(
-      select(selectTodos$),
-      tap((todos: Todo[]) => (this.todolength = todos.length))
+      select(selectTodos$)
+      // tap((todos: Todo[]) => (this.todolength = todos.length))
     );
 
     this.todoForm = this.formBuilder.group({
@@ -51,27 +51,26 @@ export class AllTodosComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.todosLoaded.subscribe((loaded: boolean) => {
-      console.log('Chargement terminé: ', loaded);
-      if (loaded === false) {
-        this.store.dispatch(new TodoListModule.LoadInitTodos());
-      }
-    });
-
+  async ngOnInit(): Promise<void> {
+    // this.todosLoaded.subscribe((loaded: boolean) => {
+    //   console.log('Chargement terminé: ', loaded);
+    //   if (loaded === false) {
+    //     this.store.dispatch(new TodoListModule.LoadInitTodos());
+    //   }
+    // });
     // console.log('Loading: ', this.todosLoading);
     // console.log('todos: ', this.todos$);
   }
 
   createTodo(todo: Todo) {
-    const payload = { ...todo, userId: 1, id: this.todolength + 1 };
+    const payload = { ...todo, userId: 1 };
 
-    this.store.dispatch(new TodoListModule.CreateTodo(payload));
+    this.store.dispatch(new TodoListModule.LoadCreateTodo(payload));
     this.todoForm.reset();
   }
 
   deleteTodo(id: number): void {
-    this.store.dispatch(new TodoListModule.DeleteTodo(id));
+    this.store.dispatch(new TodoListModule.LoadDeleteTodo(id));
   }
 
   selectTodo(todo: Todo): void {

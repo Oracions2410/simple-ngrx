@@ -20,7 +20,6 @@ export function todosReducer(
     //   };
 
     case TodoListModule.ActionTypes.LOAD_INIT_TODOS:
-      console.log('init');
       return {
         ...state,
         loading: true,
@@ -28,7 +27,6 @@ export function todosReducer(
       };
 
     case TodoListModule.ActionTypes.SUCCESS_INIT_TODOS:
-      console.log('success');
       return {
         ...state,
         loading: false,
@@ -37,23 +35,60 @@ export function todosReducer(
       };
 
     case TodoListModule.ActionTypes.ERROR_INIT_TODOS:
-      console.log('error');
       return {
         ...state,
         loaded: false,
         loading: false,
       };
 
-    case TodoListModule.ActionTypes.CREATE_TODO:
+    // case TodoListModule.ActionTypes.CREATE_TODO:
+    //   return {
+    //     ...state,
+    //     data: [...state.data, action.payload],
+    //   };
+
+    case TodoListModule.ActionTypes.LOAD_CREATE_TODO:
       return {
         ...state,
+        loading: true,
+      };
+
+    case TodoListModule.ActionTypes.SUCCESS_CREATE_TODO:
+      return {
+        ...state,
+        loading: false,
         data: [...state.data, action.payload],
       };
 
-    case TodoListModule.ActionTypes.DELETE_TODO:
+    case TodoListModule.ActionTypes.ERROR_CREATE_TODO:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    // case TodoListModule.ActionTypes.DELETE_TODO:
+    //   return {
+    //     ...state,
+    //     data: state.data.filter((todo: Todo) => todo.id !== action.payload),
+    //   };
+
+    case TodoListModule.ActionTypes.LOAD_DELETE_TODO:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case TodoListModule.ActionTypes.SUCCESS_DELETE_TODO:
       return {
         ...state,
         data: state.data.filter((todo: Todo) => todo.id !== action.payload),
+        loading: false,
+      };
+
+    case TodoListModule.ActionTypes.ERROR_DELETE_TODO:
+      return {
+        ...state,
+        loading: false,
       };
 
     case TodoListModule.ActionTypes.SELECT_TODO:
@@ -62,15 +97,36 @@ export function todosReducer(
         selectTodo: action.payload,
       };
 
-    case TodoListModule.ActionTypes.UPDATE_TODO:
+    // case TodoListModule.ActionTypes.UPDATE_TODO:
+    //   return {
+    //     ...state,
+    //     data: state.data.map((todo: Todo) => {
+    //       if (action.payload.id === todo.id) {
+    //         return action.payload;
+    //       }
+    //       return todo;
+    //     }),
+    //   };
+
+    case TodoListModule.ActionTypes.LOAD_UPDATE_TODO:
       return {
         ...state,
-        data: state.data.map((todo: Todo) => {
-          if (action.payload.id === todo.id) {
-            return action.payload;
-          }
-          return todo;
-        }),
+        loading: true,
+      };
+
+    case TodoListModule.ActionTypes.SUCCESS_UPDATE_TODO:
+      return {
+        ...state,
+        data: state.data.map((todo: Todo) =>
+          todo.id === action.payload.id ? action.payload : todo
+        ),
+        loading: false,
+      };
+
+    case TodoListModule.ActionTypes.ERROR_UPDATE_TODO:
+      return {
+        ...state,
+        loading: false,
       };
 
     default:

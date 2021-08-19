@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { IsTodosLoadedGuard } from './guards/is-todos-loaded/is-todos-loaded.guard';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
       import('./modules/todo-list/todo-list.module').then(
         (m) => m.TodoListModule
       ),
+    canActivate: [IsTodosLoadedGuard],
   },
   {
     path: '**',

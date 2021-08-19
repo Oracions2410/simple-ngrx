@@ -50,7 +50,7 @@ export class SelectTodoComponent implements OnInit {
 
   updateTodo(formValue: any) {
     const payload = { ...this.selectTodo, ...formValue };
-    this.store.dispatch(new TodoListModule.UpdateTodo(payload));
+    this.store.dispatch(new TodoListModule.LoadUpdateTodo(payload));
     return this.router.navigate(['/todo-list/all-todos']);
   }
 }
