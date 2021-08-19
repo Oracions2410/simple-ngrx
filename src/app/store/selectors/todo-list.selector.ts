@@ -14,3 +14,13 @@ export const selectTodoSelected$ = createSelector(
   selectTodoListState$,
   (state: TodoListState): Todo | undefined => state.selectTodo
 );
+
+export const selectTodosLoading$ = createSelector(
+  selectTodoListState$,
+  (todos) => todos.loading
+);
+
+export const selectTodosLoaded$ = createSelector(
+  selectTodoListState$,
+  (todos) => todos.loaded
+);

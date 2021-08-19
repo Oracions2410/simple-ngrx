@@ -24,7 +24,8 @@
       "@Selectors/*": ["./src/app/store/selectors/*"],
       "@Reducers/*": ["./src/app/store/reducers/*"],
       "@Services/*": ["./src/app/services/*"],
-      "@Env": ["./src/environments/environment.ts"]
+      "@Env": ["./src/environments/environment.ts"],
+      "@Effects/*": ["./src/app/store/effects/*"]
     }
   },
   "angularCompilerOptions": {

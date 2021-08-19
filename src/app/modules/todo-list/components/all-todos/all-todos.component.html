@@ -8,6 +8,10 @@
   <button>Créer</button>
 </form>
 
+<div>
+  {{ todosLoaded | async }}
+  <span *ngIf="todosLoading | async">Chargement...</span>
+</div>
 <ul>
   <li *ngFor="let todo of todos$ | async">
     <label>{{ todo.title }}</label>

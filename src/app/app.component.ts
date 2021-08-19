@@ -11,16 +11,14 @@ import { Todo } from '@Models/todo.model';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private store: Store<AppState>,
-    private todoListService: TodoListService
-  ) {}
+  constructor(private store: Store<AppState>) {}
 
   async ngOnInit(): Promise<void> {
-    let todos: Todo[] = [];
-    todos = await this.todoListService.getTodos().toPromise();
-    if (todos.length > 0) {
-      this.store.dispatch(new TodoListModule.InitTodos(todos));
-    }
+    // let todos: Todo[] = [];
+    // todos = await this.todoListService.getTodos().toPromise();
+    // if (todos.length > 0) {
+    //   this.store.dispatch(new TodoListModule.InitTodos(todos));
+    // }
+    // this.store.dispatch(new TodoListModule.LoadInitTodos());
   }
 }

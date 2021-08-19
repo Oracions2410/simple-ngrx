@@ -1,6 +1,5 @@
 import { TodoListModule } from '@Actions/todo-list.action';
 import { TodoListState, Todo } from '@Models/todo.model';
-import { todosMock } from '../../mocks/todo-list-data';
 
 const initialState: TodoListState = {
   data: [],
@@ -14,10 +13,35 @@ export function todosReducer(
   action: TodoListModule.Actions
 ): TodoListState {
   switch (action.type) {
-    case TodoListModule.ActionTypes.INIT_TODOS:
+    // case TodoListModule.ActionTypes.INIT_TODOS:
+    //   return {
+    //     ...state,
+    //     data: [...action.payload],
+    //   };
+
+    case TodoListModule.ActionTypes.LOAD_INIT_TODOS:
+      console.log('init');
       return {
         ...state,
-        data: [...action.payload],
+        loading: true,
+        loaded: false,
+      };
+
+    case TodoListModule.ActionTypes.SUCCESS_INIT_TODOS:
+      console.log('success');
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        data: action.payload,
+      };
+
+    case TodoListModule.ActionTypes.ERROR_INIT_TODOS:
+      console.log('error');
+      return {
+        ...state,
+        loaded: false,
+        loading: false,
       };
 
     case TodoListModule.ActionTypes.CREATE_TODO:

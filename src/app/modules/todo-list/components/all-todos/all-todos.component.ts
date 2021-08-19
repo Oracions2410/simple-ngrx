@@ -5,7 +5,11 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Todo } from '@Models/todo.model';
 import { AppState } from '@StoreConfig';
-import { selectTodos$ } from '@Selectors/todo-list.selector';
+import {
+  selectTodos$,
+  selectTodosLoaded$,
+  selectTodosLoading$,
+} from '@Selectors/todo-list.selector';
 import { TodoListModule } from '@Actions/todo-list.action';
 import { Router } from '@angular/router';
 
@@ -19,6 +23,10 @@ export class AllTodosComponent implements OnInit {
 
   todoForm: FormGroup;
 
+  todosLoading: Observable<boolean>;
+
+  todosLoaded: Observable<boolean>;
+
   private todolength: number;
 
   constructor(
@@ -29,10 +37,14 @@ export class AllTodosComponent implements OnInit {
     // Initialization
     this.todolength = 0;
 
+    this.todosLoading = store.pipe(select(selectTodosLoading$));
+    this.todosLoaded = store.pipe(select(selectTodosLoaded$));
+
     this.todos$ = store.pipe(
       select(selectTodos$),
       tap((todos: Todo[]) => (this.todolength = todos.length))
     );
+
     this.todoForm = this.formBuilder.group({
       title: ['', Validators.required],
       completed: [false],
@@ -40,7 +52,15 @@ export class AllTodosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.store.dispatch(new TodoListModule.InitTodos());
+    this.todosLoaded.subscribe((loaded: boolean) => {
+      console.log('Chargement terminé: ', loaded);
+      if (loaded === false) {
+        this.store.dispatch(new TodoListModule.LoadInitTodos());
+      }
+    });
+
+    // console.log('Loading: ', this.todosLoading);
+    // console.log('todos: ', this.todos$);
   }
 
   createTodo(todo: Todo) {
